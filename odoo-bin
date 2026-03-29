@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/home/shamil-suraweera/Documents/G-TEK/From_Scratch/Odoo/odoo-16/.venv/bin/python3
 
 # set server timezone in UTC before time module imported
 __import__('os').environ['TZ'] = 'UTC'
