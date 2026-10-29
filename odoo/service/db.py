@@ -136,7 +136,8 @@ def _create_empty_database(name):
             cr._cnx.autocommit = True
 
             # 'C' collate is only safe with template0, but provides more useful indexes
-            collate = sql.SQL("LC_COLLATE 'C'" if chosen_template == 'template0' else "")
+            # LC_CTYPE must match LC_COLLATE: PostgreSQL on Windows rejects databases where they differ
+            collate = sql.SQL("LC_COLLATE 'C' LC_CTYPE 'C'" if chosen_template == 'template0' else "")
             cr.execute(
                 sql.SQL("CREATE DATABASE {} ENCODING 'unicode' {} TEMPLATE {}").format(
                 sql.Identifier(name), collate, sql.Identifier(chosen_template)
